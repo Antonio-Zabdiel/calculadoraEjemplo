@@ -278,7 +278,7 @@
         android:backgroundTint="#bc9af7"
         android:text="."
         android:textSize="30dp"
-        android:onClick="Dot"
+        android:onClick="Point"
         app:layout_constraintBottom_toTopOf="@+id/guideline207"
         app:layout_constraintEnd_toStartOf="@+id/guideline104"
         app:layout_constraintStart_toStartOf="@+id/guideline103"

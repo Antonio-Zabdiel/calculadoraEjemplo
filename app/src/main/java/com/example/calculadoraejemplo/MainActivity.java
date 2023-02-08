@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
     boolean si = true;
     boolean positivo = true;
     boolean percent = false;
+    int decimalPlace = 0;
+    boolean point = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +34,39 @@ public class MainActivity extends AppCompatActivity {
         tvResultado.setText(newRes);
     }
 
-    public void Escribir(int num) {
+    public void Escribir(int num){
+        float numRam = num;
+        float resRam = res;
         if(si){
-            res = 0;
+            resRam = 0;
+            point = false;
         }
-        res = res * 10;
-        if(positivo){
-            res += num;
+        if(!positivo){
+            numRam = numRam * -1;
         }
-        else {
-            res -= num;
+        if(!point){
+            resRam = resRam * 10;
+            if(resRam == 0) {
+                decimalPlace = 0;
+            }
+
         }
+        for(int i = 0; i < decimalPlace; i++){
+            numRam = numRam/10;
+        }
+        resRam += numRam;
+
+        res = resRam;
         UpdateRes();
         si = false;
+    }
+
+    public void Point(View view){
+        if(!point){
+            decimalPlace = 0;
+            point = true;
+        }
+            decimalPlace++;
     }
 
     public void AC(View view){
