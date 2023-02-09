@@ -10,11 +10,11 @@ public class MainActivity extends AppCompatActivity {
     float res = 0.0f;
     float ram = 0.0f;
     String operacion = "";
-    boolean si = true;
     boolean positivo = true;
     boolean percent = false;
     int decimalPlace = 0;
     boolean point = false;
+    boolean newNum = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void UpdateRes(){
         String newRes = " ";
+
         if(percent){
             newRes = String.valueOf(res * 100) + "%";
         }else{
@@ -34,55 +35,71 @@ public class MainActivity extends AppCompatActivity {
         tvResultado.setText(newRes);
     }
 
-    public void Escribir(int num){
+    public void Escribir(int num) {
         float numRam = num;
         float resRam = res;
-        if(si){
+
+        if(newNum){
             resRam = 0;
-            point = false;
         }
+
         if(!positivo){
             numRam = numRam * -1;
         }
+
+        if(percent){
+            numRam = numRam/100;
+        }
+
+        if(newNum){
+            point = false;
+            decimalPlace = 0;
+        }else{
+            if(point){
+                decimalPlace ++;
+            }
+        }
+
         if(!point){
             resRam = resRam * 10;
-            if(resRam == 0) {
-                decimalPlace = 0;
-            }
-
         }
+
         for(int i = 0; i < decimalPlace; i++){
             numRam = numRam/10;
         }
-        resRam += numRam;
 
+        resRam += numRam;
         res = resRam;
         UpdateRes();
-        si = false;
+        newNum = false;
     }
 
     public void Point(View view){
-        if(!point){
-            decimalPlace = 0;
-            point = true;
-        }
-            decimalPlace++;
+        point = true;
     }
 
     public void AC(View view){
         AC();
     }
+
     public void AC(){
         res = 0;
         ram = 0;
         operacion = "";
         UpdateRes();
-        si = true;
         positivo = true;
+        newNum = true;
     }
 
     public void Percent(View view){
         percent = !percent;
+
+        if(percent){
+            res = res/100;
+        }else{
+            res = res*100;
+        }
+
         UpdateRes();
     }
     public void Change(View view){
@@ -90,15 +107,19 @@ public class MainActivity extends AppCompatActivity {
         positivo = 0 <= res;
         UpdateRes();
     }
+
     public void Plus(View view){
         Operacion("+");
     }
+
     public void Minus(View view){
         Operacion("-");
     }
+
     public void Div(View view){
         Operacion("/");
     }
+
     public void Times(View view){
         Operacion("*");
     }
@@ -107,11 +128,9 @@ public class MainActivity extends AppCompatActivity {
         operacion = "";
         res = ram;
         UpdateRes();
-        si = true;
     }
 
     public void Operacion(String operacion){
-
         switch (this.operacion){
             case "+":
                 ram = ram + res;
@@ -129,10 +148,11 @@ public class MainActivity extends AppCompatActivity {
                 ram = res;
                 break;
         }
+
         this.operacion = operacion;
         res = 0;
         UpdateRes();
-        si = false;
+        newNum = true;
     }
 
 
@@ -141,30 +161,39 @@ public class MainActivity extends AppCompatActivity {
     public void Escribir0(View view) {
         Escribir(0);
     }
+
     public void Escribir1(View view) {
         Escribir(1);
     }
+
     public void Escribir2(View view) {
         Escribir(2);
     }
+
     public void Escribir3(View view) {
         Escribir(3);
     }
+
     public void Escribir4(View view) {
         Escribir(4);
     }
+
     public void Escribir5(View view) {
         Escribir(5);
     }
+
     public void Escribir6(View view) {
         Escribir(6);
     }
+
     public void Escribir7(View view) {
         Escribir(7);
     }
+
     public void Escribir8(View view) {
         Escribir(8);
     }
+
     public void Escribir9(View view) {
         Escribir(9);
     }
