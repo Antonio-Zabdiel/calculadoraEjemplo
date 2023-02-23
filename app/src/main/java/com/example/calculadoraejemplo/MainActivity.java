@@ -120,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
     public void Times(View view){
         Operacion("*");
     }
+
+    public void Pow(View view) { Operacion("^"); }
+
     public void Equals(View view){
         Operacion(operacion);
         operacion = "";
@@ -144,6 +147,9 @@ public class MainActivity extends AppCompatActivity {
             case "%":
                 ram = ram * res / 100;
                 break;
+            case "^":
+                ram = Math.pow(ram, res);
+                break;
             default:
                 ram = res;
                 break;
@@ -155,8 +161,64 @@ public class MainActivity extends AppCompatActivity {
         newNum = true;
     }
 
+    public void OperacionSingle(String operacion) {
+        switch (operacion) {
+            case "inv":
+                res = 1 / res;
+                break;
+            case "log":
+                res = Math.log10(res);
+                break;
+            case "ln":
+                res = Math.log(res);
+                break;
+            case "sin":
+                res = Math.sin(Math.toRadians(res));
+                break;
+            case "cos":
+                res = Math.cos(Math.toRadians(res));
+                break;
+            case "tan":
+                res = Math.tan(Math.toRadians(res));
+                break;
+            case "rnd":
+                res = Math.random();
+                break;
+            default:
+                res = res;
+                break;
+        }
+        UpdateRes();
+        newNum = true;
+    }
 
+    public void Inverse(View view) {
+        OperacionSingle("inv");
+    }
 
+    public void Log(View view){
+        OperacionSingle("log");
+    }
+
+    public void Ln(View view){
+        OperacionSingle("ln");
+    }
+
+    public void Sin(View view){
+        OperacionSingle("sin");
+    }
+
+    public void Cos(View view){
+        OperacionSingle("cos");
+    }
+
+    public void Tan(View view){
+        OperacionSingle("tan");
+    }
+
+    public void Rnd(View view){
+        OperacionSingle("rnd");
+    }
 
     public void Escribir0(View view) {
         Escribir(0);
